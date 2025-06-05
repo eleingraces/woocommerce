@@ -18,6 +18,7 @@ To Run the cypress-gherkins test automation
 
 
 Run End to End FrontEnd test (via headless mode): **npx cypress run --spec "cypress/e2e/features/wholesale_price.feature"**
+
 Run End to End FrontEnd test (via headed mode): **npx cypress open**
 
  

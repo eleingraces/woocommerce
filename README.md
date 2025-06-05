@@ -22,23 +22,23 @@ Run End to End FrontEnd test (via headed mode): **npx cypress open**
 
  
 # 📙 Test Coverage
-Test Scenario 1: Validate the display of wholesale prices per page 
+**Test Scenario 1: Validate the display of wholesale prices per page**
 
-  Test Case 1: Validate that the wholesale price of a product is displayed in Shop list page
+   TS1.Test Case 1: Validate that the wholesale price of a product is displayed in Shop list page
   
-  Test Case 2: Validate that the wholesale price of a product is displayed in the Cart page
+   TS1.Test Case 2: Validate that the wholesale price of a product is displayed in the Cart page
+   
+   TS1.Test Case 3: Validate that the wholesale price of a product is displayed in the Product page
   
-  Test Case 3: Validate that the wholesale price of a product is displayed in the Product page
-  
-Test Scenario 2: Validate the wholesale price computation.
+**Test Scenario 2: Validate the wholesale price computation.**
 
-  Test Case 1: Validate the wholesale price per product in the Cart page
+  TS2.Test Case 1: Validate the wholesale price per product in the Cart page
   
-  Test Case 2: Validate the total price of wholesale product/s in the Cart page
+  TS2.Test Case 2: Validate the total price of wholesale product/s in the Cart page
   
-  Test Case 3: Validate the wholesale price per product in the Order Summary
+  TS2.Test Case 3: Validate the wholesale price per product in the Order Summary
   
-  Test Case 4: Validate the total price of wholesale product/s in the Order Summary
+  TS2.Test Case 4: Validate the total price of wholesale product/s in the Order Summary
   
 
  

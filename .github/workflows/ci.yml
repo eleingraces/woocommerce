@@ -55,7 +55,7 @@ jobs:
         run: npx cypress install
 
       - name: Run Cypress tests
-        run: npx cypress run --spec "cypress/e2e/features/wholesale_price.cy.js"
+        run: npx cypress run --spec "cypress/e2e/features/wholesale_price.js"
 
       - name: Tear down Docker Compose
         if: always()

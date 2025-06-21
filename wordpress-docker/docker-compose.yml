@@ -30,11 +30,17 @@ services:
     image: wordpress:cli
     depends_on:
       - wordpress
+      - db
     volumes:
       - ./wordpress:/var/www/html
     networks:
       - wordpress_net
     entrypoint: wp
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: example
 
 volumes:
   db_data:

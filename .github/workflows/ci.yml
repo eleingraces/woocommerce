@@ -46,8 +46,8 @@ jobs:
       - name: Wait for WordPress to be ready
         run: |
           for i in {1..30}; do
-            curl --fail http://localhost:8000/wp-login.php && break
-            echo "Waiting for WordPress to start..."
+            curl --fail http://localhost:8000/?page_id=9 && break
+            echo "Waiting for http://localhost:8000/?page_id=9 to start..."
             sleep 5
           done
 

@@ -4,20 +4,20 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main]	
+    branches: [ main ]	
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-	      node-version: "18"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
 
-    - name: Run my custom script
-      run: npx cypress run --spec "cypress/e2e/features/wholesale_price"
+      - name: Run my custom script
+        run: npx cypress run --spec "cypress/e2e/features/wholesale_price.cy.js"

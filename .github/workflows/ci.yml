@@ -1,29 +1,45 @@
-name: Run Woocommerce Script
+name: WooCommerce CI
 
 on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]	
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
-      
+          node-version: '18'
+
       - name: Install dependencies
         run: npm install
+
+      - name: Start Docker Compose services
+        run: |
+          docker-compose up -d
+          
+      - name: Wait for WordPress to be ready
+        run: |
+          for i in {1..30}; do
+            curl --fail http://localhost:8000/wp-login.php && break
+            echo "Waiting for WordPress to start..."
+            sleep 5
+          done
 
       - name: Install Cypress binary
         run: npx cypress install
 
-      - name: Run my custom script
+      - name: Run Cypress tests
         run: npx cypress run --spec "cypress/e2e/features/wholesale_price.cy.js"
+
+      - name: Tear down Docker Compose
+        if: always()
+        run: docker-compose down

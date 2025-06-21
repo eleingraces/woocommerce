@@ -26,6 +26,16 @@ services:
     networks:
       - wordpress_net
 
+  wpcli:
+    image: wordpress:cli
+    depends_on:
+      - wordpress
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      - wordpress_net
+    entrypoint: wp
+
 volumes:
   db_data:
 

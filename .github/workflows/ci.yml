@@ -54,13 +54,13 @@ jobs:
       - name: Install WordPress via WP-CLI
         working-directory: wordpress-docker
         run: |
-          docker compose exec -T wordpress wp core install \
-            --url="http://localhost:8000" \
-            --title="Woo Test Site" \
-            --admin_user=admin \
-            --admin_password=admin123 \
-            --admin_email=admin@example.com \
-            --skip-email
+          docker compose run --rm wpcli core install \
+          --url="http://localhost:8000" \
+          --title="Woo Test Site" \
+          --admin_user=admin \
+          --admin_password=admin123 \
+          --admin_email=admin@example.com \
+          --skip-email
 
       - name: Wait for WordPress to be ready
         run: |

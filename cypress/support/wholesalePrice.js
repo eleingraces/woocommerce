@@ -50,6 +50,7 @@ class woocommerce {
             this.elements.password().type(password);
       });
 
+      cy.wait(2000)
       this.elements.loginBtn().click();
       cy.wait(2000);
   }

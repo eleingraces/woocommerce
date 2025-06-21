@@ -43,10 +43,29 @@ jobs:
         working-directory: wordpress-docker
         run: docker compose up -d
 
+      - name: Wait for MySQL to be ready
+        run: |
+          for i in {1..30}; do
+            docker exec wordpress-docker-db-1 mysqladmin ping -h "db" --silent && break
+            echo "Waiting for MySQL..."
+            sleep 3
+          done
+
+      - name: Install WordPress via WP-CLI
+        working-directory: wordpress-docker
+        run: |
+          docker compose exec -T wordpress wp core install \
+            --url="http://localhost:8000" \
+            --title="Woo Test Site" \
+            --admin_user=admin \
+            --admin_password=admin123 \
+            --admin_email=admin@example.com \
+            --skip-email
+
       - name: Wait for WordPress to be ready
         run: |
           for i in {1..30}; do
-            curl --fail http://localhost:8000/?page_id=9 && break
+            curl --fail "http://localhost:8000/?page_id=9" && break
             echo "Waiting for http://localhost:8000/?page_id=9 to start..."
             sleep 5
           done
@@ -68,9 +87,3 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-
-      - name: Upload Cypress videos
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-videos

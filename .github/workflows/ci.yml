@@ -55,18 +55,31 @@ jobs:
         working-directory: wordpress-docker
         run: |
           docker compose run --rm wpcli core install \
-          --url="http://localhost:8000" \
-          --title="Woo Test Site" \
-          --admin_user=admin \
-          --admin_password=admin123 \
-          --admin_email=admin@example.com \
-          --skip-email
+            --url="http://localhost:8000" \
+            --title="Woo Test Site" \
+            --admin_user=admin \
+            --admin_password=admin123 \
+            --admin_email=admin@example.com \
+            --skip-email
 
-      - name: Wait for WordPress to be ready
+      - name: Create Cypress test page
+        working-directory: wordpress-docker
+        run: |
+          docker compose run --rm wpcli post create \
+            --post_type=page \
+            --post_title="Wholesale Price Test Page" \
+            --post_content="Page for Cypress test" \
+            --post_status=publish
+
+      - name: List WordPress pages (debug)
+        working-directory: wordpress-docker
+        run: docker compose run --rm wpcli post list --post_type=page --format=table
+
+      - name: Wait for WordPress home page
         run: |
           for i in {1..30}; do
-            curl --fail "http://localhost:8000/?page_id=9" && break
-            echo "Waiting for http://localhost:8000/?page_id=9 to start..."
+            curl --fail "http://localhost:8000" && break
+            echo "Waiting for WordPress home page..."
             sleep 5
           done
 

@@ -1,10 +1,11 @@
 const { defineConfig } = require("cypress");
 const createBundler = require("@bahmutov/cypress-esbuild-preprocessor");
 const { addCucumberPreprocessorPlugin } = require("@badeball/cypress-cucumber-preprocessor");
+const { default: woocommerce } = require("./cypress/support/wholesalePrice");
 const createEsbuildPlugin = require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 
 module.exports = defineConfig({
-  
+  projectId: "woocommerce",
   e2e: {
     stepDefinitions: "cypress/e2e/features/**/*.js",
     specPattern: "cypress/e2e/**/*.feature",

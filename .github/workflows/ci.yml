@@ -62,9 +62,9 @@ jobs:
             --admin_email=admin@example.com \
             --skip-email
       
-     - name: Insert test page with ID 9
-       working-directory: wordpress-docker
-       run: |
+      - name: Insert test page with ID 9
+        working-directory: wordpress-docker
+        run: |
          MYSQL_PWD=example docker compose exec -T db mysql -uroot wordpress -e "
          INSERT INTO wp_posts (ID, post_author, post_date, post_date_gmt, post_content, post_title,
          post_excerpt, post_status, comment_status, ping_status,

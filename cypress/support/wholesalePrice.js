@@ -210,7 +210,7 @@ class woocommerce {
    validateTotalPriceInOrderSummary() {
       this.elements.orderSummary()
          .find('div')
-         .eq('7')
+         .eq(7)
          .find('span')
          .eq(0)
          .invoke('text')

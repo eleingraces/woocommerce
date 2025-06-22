@@ -62,14 +62,17 @@ jobs:
             --admin_email=admin@example.com \
             --skip-email
       
-      - name: Insert test page with ID 9
-        working-directory: wordpress-docker
-        run: |
-          docker compose exec -T db mysql -uroot -pexample wordpress -e "
-              INSERT INTO wp_posts (ID, post_author, post_date, post_date_gmt, post_content, post_title,
-              post_status, comment_status, ping_status, post_name, post_type
-              ) VALUES (9, 1, NOW(), NOW(), 'Cypress test content', 'Wholesale Price Page',
-              'publish', 'closed', 'closed', 'wholesale-price-page', 'page') ON DUPLICATE KEY UPDATE post_status='publish';"
+     - name: Insert test page with ID 9
+       working-directory: wordpress-docker
+       run: |
+         MYSQL_PWD=example docker compose exec -T db mysql -uroot wordpress -e "
+         INSERT INTO wp_posts (ID, post_author, post_date, post_date_gmt, post_content, post_title,
+         post_excerpt, post_status, comment_status, ping_status,
+         post_name, post_modified, post_modified_gmt, post_type
+         ) VALUES (9, 1, NOW(), NOW(), 'Cypress test content', 'Wholesale Price Page',
+         '', 'publish', 'closed', 'closed','wholesale-price-page', NOW(), NOW(),'page')
+         ON DUPLICATE KEY UPDATE post_status='publish';"
+
 
       - name: Create Cypress test page
         working-directory: wordpress-docker
